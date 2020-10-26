@@ -1,27 +1,28 @@
 package com.project.clientresource.resources;
 
-import java.time.Instant;
-import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.project.clientresource.entities.Cliente;
+import com.project.clientresource.entities.Client;
+import com.project.clientresource.services.ClientService;
 
 @RestController
-@RequestMapping(value = "/clientes")
+@RequestMapping(value = "/clients")
 public class ClienteResource {
-	
+
+	@Autowired
+	private ClientService service;
+
 	@GetMapping
-	public ResponseEntity<List<Cliente>> findAll(){
-		List<Cliente> list = new ArrayList<>();
-		list.add(new Cliente(1L, "João","12345678912", 5500.00,Instant.now(), 2));
-		list.add(new Cliente(2L, "Maria","12345678912", 5500.00, Instant.now(), 2));
+	public ResponseEntity<List<Client>> findAll() {
+		List<Client> list = service.fundAll();
 		return ResponseEntity.ok().body(list);
-		
+
 	}
 
 }
