@@ -1,6 +1,7 @@
 package com.project.clientresource.services;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +19,19 @@ public class ClientService {
 	private ClientRepository repository;
 	
 	@Transactional(readOnly = true)
-	public List<ClientDTO> fundAll(){
+	public List<ClientDTO> findAll(){
 		List<Client> list = repository.findAll();
 		
 		return list.stream().map(x -> new ClientDTO(x)).collect(Collectors.toList());
 		
+		
+	}
+
+	@Transactional(readOnly = true)
+	public ClientDTO finById(Long id) {
+		Optional<Client> obj = repository.findById(id);
+		Client entity = obj.get();
+		return new ClientDTO(entity);
 		
 	}
 	
