@@ -8,6 +8,7 @@ public class ClientResourceApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ClientResourceApplication.class, args);
+		
 	}
 
 }
